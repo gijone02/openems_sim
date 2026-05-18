@@ -1,0 +1,1 @@
+Ight, so you gotta run the "setup.bat" file before doing all the EMS magic. This installs all the .whl files from EMS so you don't have to. 
