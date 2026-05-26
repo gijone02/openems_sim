@@ -13,7 +13,7 @@ def setup_fdtd(CSX):
     FDTD.SetCSX(CSX)
 
     # Simulation settings
-    FDTD.SetNumberOfTimeSteps(1000)
+    FDTD.SetNumberOfTimeSteps(1e5)
     FDTD.SetBoundaryCond([3, 3, 3, 3, 3, 3])
     FDTD.SetGaussExcite(2.4e9, 1e9)
 
@@ -27,9 +27,9 @@ def setup_mesh(CSX):
     mesh = CSX.GetGrid()
     mesh.SetDeltaUnit(1e-3)
 
-    mesh.AddLine('x', np.linspace(-10, 10, 20))
-    mesh.AddLine('y', np.linspace(-10, 10, 20))
-    mesh.AddLine('z', np.linspace(-10, 10, 20))
+    mesh.AddLine('x', np.linspace(-10, 10, 51))
+    mesh.AddLine('y', np.linspace(-10, 10, 51))
+    mesh.AddLine('z', np.linspace(-10, 10, 51))
 
 
 def run_simulation(FDTD, sim_path):

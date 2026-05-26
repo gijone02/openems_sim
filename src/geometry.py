@@ -7,14 +7,15 @@ def create_structure():
     """
     CSX = ContinuousStructure()
 
-    # Add PEC metal
+    # --- Material definition ---
     metal = CSX.AddMetal("PEC")
 
-    CSX.AddBox(
-        metal,
-        priority=10,
-        start=[-2, -2, 0],
-        stop=[2, 2, 0.5]
+    # --- Geometry ---
+    
+    metal.AddBox(
+    priority=10,
+    start=[-2, -2, 0],
+    stop=[2, 2, 0.5]
     )
 
     return CSX
@@ -22,13 +23,17 @@ def create_structure():
 
 def add_port(FDTD):
     """
-    Adds a lumped port to the simulation
+    Define excitation/measurement region
     """
     port = FDTD.AddLumpedPort(
-        port_nr=1,
-        R=50,
-        start=[0, 0, 0],
-        stop=[0, 0, 0.5],
-        direction='z'
+    1,          # port number
+    50,         # resistance
+    [0, 0, 0],  # start
+    [0, 0, 0.4],# stop
+    'z',        # direction
+    1.0         # excitation
     )
+
+    
+
     return port
