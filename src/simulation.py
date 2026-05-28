@@ -20,16 +20,25 @@ def setup_fdtd(CSX):
     return FDTD
 
 
+import numpy as np
+
 def setup_mesh(CSX):
-    """
-    Defines the simulation grid
-    """
+
     mesh = CSX.GetGrid()
     mesh.SetDeltaUnit(1e-3)
 
-    mesh.AddLine('x', np.linspace(-10, 10, 51))
-    mesh.AddLine('y', np.linspace(-10, 10, 51))
-    mesh.AddLine('z', np.linspace(-10, 10, 51))
+    # High resolution around dipole
+    mesh.AddLine('z', np.concatenate([
+        np.linspace(-100, -5, 381),
+        np.linspace(-5, 5, 81),      # dense region at feed
+        np.linspace(5, 100, 381)
+    ]))
+
+    # Symmetric grid
+    mesh.AddLine('x', np.linspace(-20, 20, 121))
+    mesh.AddLine('y', np.linspace(-20, 20, 121))
+
+    return
 
 
 def run_simulation(FDTD, sim_path):
